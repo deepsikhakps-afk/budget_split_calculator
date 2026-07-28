@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ledger — Split expenses, settle in the fewest moves</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="hero-eyebrow">a ledger for shared money</div>
+    <h1>Ledger</h1>
+    <p class="hero-sub">Add who paid what. Ledger works out the fewest payments needed to square everyone up — not who-owes-who for every single expense, just the net result.</p>
+  </header>
+
+  <section class="panel" id="people-panel">
+    <div class="panel-head">
+      <h2><span class="panel-num">01</span>People</h2>
+    </div>
+    <form id="person-form" class="inline-form">
+      <input type="text" id="person-name" placeholder="Add a name" autocomplete="off" required>
+      <button type="submit" class="btn btn-ink">Add</button>
+    </form>
+    <ul id="people-list" class="chip-list"></ul>
+  </section>
+
+  <section class="panel" id="expense-panel">
+    <div class="panel-head">
+      <h2><span class="panel-num">02</span>Expenses</h2>
+    </div>
+    <form id="expense-form" class="expense-form">
+      <div class="field">
+        <label for="expense-desc">What was it for</label>
+        <input type="text" id="expense-desc" placeholder="e.g. Hostel dinner" required>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="expense-amount">Amount</label>
+          <input type="number" id="expense-amount" min="0.01" step="0.01" placeholder="0.00" required>
+        </div>
+        <div class="field">
+          <label for="expense-payer">Paid by</label>
+          <select id="expense-payer" required></select>
+        </div>
+      </div>
+      <div class="field">
+        <label>Split among</label>
+        <div id="split-among" class="split-checks"></div>
+      </div>
+      <button type="submit" class="btn btn-accent">Add expense</button>
+    </form>
+
+    <div class="ledger-list-wrap">
+      <table class="ledger-table" id="expense-table">
+        <thead>
+          <tr><th>Description</th><th>Amount</th><th>Paid by</th><th>Split among</th><th></th></tr>
+        </thead>
+        <tbody id="expense-tbody"></tbody>
+      </table>
+      <p class="empty-note" id="expense-empty">No expenses yet. Add the first one above.</p>
+    </div>
+  </section>
+
+  <section class="panel" id="balance-panel">
+    <div class="panel-head">
+      <h2><span class="panel-num">03</span>Balances</h2>
+    </div>
+    <div class="balance-grid">
+      <div class="balance-chart">
+        <canvas id="balance-chart"></canvas>
+      </div>
+      <ul id="balance-list" class="balance-list"></ul>
+    </div>
+  </section>
+
+  <section class="panel" id="settlement-panel">
+    <div class="panel-head">
+      <h2><span class="panel-num">04</span>Settle up</h2>
+    </div>
+    <div id="settlement-flow" class="settlement-flow"></div>
+    <p class="empty-note" id="settlement-empty">Add people and expenses to see the settlement plan.</p>
+    <div class="export-row">
+      <button id="export-pdf" class="btn btn-ink" disabled>Export as PDF</button>
+      <button id="export-whatsapp" class="btn btn-outline" disabled>Share via WhatsApp</button>
+      <button id="reset-all" class="btn btn-text">Clear everything</button>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span>Everything above lives only in this browser — nothing is sent anywhere.</span>
+  </footer>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/calculator.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
