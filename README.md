@@ -36,7 +36,7 @@ Budget-Split-Calculator/
 5. View the calculated amount per person instantly.
 
 ## 📸 Screenshot
-
+![alt text](image.png)
 
 ## 🎯 Future Improvements
 
